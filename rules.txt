@@ -1,0 +1,56 @@
+rule "Bulb1 Startup"
+when
+        System started
+then
+        executeCommandLine("python@@/home/openhabian/bulb1/bulb1.py")
+end
+
+var String init = "0"
+rule “Bulb1 Dawn Simulation"
+when
+        Time cron "0/10 * * ? * * *"
+then
+        if (Bulb1_Dawn.state == ON)
+        {
+                if (Bulb1_Power.state == OFF)
+                {
+                        //day settings
+                        val monday = if (Bulb1_Monday.state == ON) "1" else 0
+                        val tuesday = if (Bulb1_Tuesday.state == ON) "2" else 0
+                        val wednesday = if (Bulb1_Wednesday.state == ON) "3" else 0
+                        val thursday = if (Bulb1_Thursday.state == ON) "4" else 0
+                        val friday = if (Bulb1_Friday.state == ON) "5" else 0
+                        val saturday = if (Bulb1_Saturday.state == ON) "6" else 0
+                        val sunday = if (Bulb1_Sunday.state == ON) "7" else 0
+
+                        //starting time settings
+                        var hour=Bulb1_Hour.state.toString
+                        var minute=Bulb1_Minute.state.toString
+
+                        //wake up interval settings
+                        var String interval = Bulb1_Interval.state.toString
+                        if (interval == "1")
+                                interval="900"
+                        if (interval == "2")
+                                interval="1800"
+                        if (interval == "3")
+                                interval="2700"
+                        if (interval == "4")
+                                interval=“3600"
+
+					   //activation
+                        var day = now.getDayOfWeek.toString
+
+                        if (minute == now.getMinuteOfHour.toString && hour == now.getHourOfDay.toString && ok != "0" && init == "0" && (day == monday || day == tuesday || day == wednesday || day == thursday || day == friday || day == sat$
+                        {
+                                executeCommandLine("python@@/home/openhabian/bulb1/dawn.py@@"+interval)
+                                init = "1"
+                        }                }
+        }
+end
+
+rule “Reset init"
+when
+        Time cron "0 0 0/1 1/1 * ? *"
+then
+        init = "0"

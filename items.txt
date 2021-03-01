@@ -1,0 +1,25 @@
+//BULB1 Items + Channels
+//General Settings
+Switch Bulb1_Power "Power On/Off Switch" {channel="mqtt:topic:dc8c78ef:1"}
+Dimmer Bulb1_Brightness "Brightness" {channel="mqtt:topic:dc8c78ef:2"}
+Color Bulb1_Color "Color" {channel="mqtt:topic:dc8c78ef:3"}
+Dimmer Bulb1_Temperature "Color Temperature" {channel="mqtt:topic:dc8c78ef:4"}
+
+//Dawn Simulation
+Switch Bulb1_Dawn "Activate Dawn Simulation"
+
+//Starting time settings
+Number Bulb1_Hour "Hour [%d]"
+Number Bulb1_Minute "Minute [%d]"
+
+//wakeup interval settings
+Number Bulb1_Interval "Interval"
+
+//Day
+Switch Bulb1_Monday "Select Monday"
+Switch Bulb1_Tuesday "Select Tuesday"
+Switch Bulb1_Wednesday "Select Wednesday"
+Switch Bulb1_Thursday "Select Thursday"
+Switch Bulb1_Friday "Select Friday"
+Switch Bulb1_Saturday "Select Saturday"
+Switch Bulb1_Sunday "Select Sunday”

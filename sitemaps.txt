@@ -1,0 +1,36 @@
+itemap demo label="Welcome home!"
+{
+        Frame label="Livingroom Bulb1"
+        {
+                Frame label="General Settings"
+                {
+                        Switch item=Bulb1_Power label="Power On/Off" icon="switch"
+                        Slider item=Bulb1_Brightness label="Brightness" icon="light" visibility=[Bulb1_Power==ON]
+                        Colorpicker item=Bulb1_Color label="Color" icon="colorwheel" visibility=[Bulb1_Power==ON]
+                        Slider item=Bulb1_Temperature label="Color Temperature" icon="temperature" visibility=[Bulb1_Power==ON]
+                }
+                Frame label="Dawn Simulation"
+                {
+                        Switch item=Bulb1_Dawn label="Activate Dawn Simulation" icon="switch"
+                        Frame label="Starting time settings" visibility=[Bulb1_Dawn==ON]
+                        {
+                                Setpoint item=Bulb1_Hour label="Hour [%d]" minValue=1 maxValue=24 step=1
+                                Setpoint item=Bulb1_Minute label="Minute [%d]" minValue=0 maxValue=59 step=1
+                        }
+                        Frame label="Wake up interval settings" visibility=[Bulb1_Dawn==ON]
+                        {
+                                Selection item=Bulb1_Interval label="Interval" mappings=[1="15 minutes",2="30 minutes",3="45 minutes",4="1 hour"]
+                        }
+                        Frame label="Day settings" visibility=[Bulb1_Dawn==ON]
+                        {
+                                Switch item=Bulb1_Monday label="Select Monday"
+                                Switch item=Bulb1_Tuesday label="Select Tuesday"
+                                Switch item=Bulb1_Wednesday label="Select Wednesday"
+                                Switch item=Bulb1_Thursday label="Select Thursday"
+                                Switch item=Bulb1_Friday label="Select Friday"
+                                Switch item=Bulb1_Saturday label="Select Saturday"
+                                Switch item=Bulb1_Sunday label="Select Sunday"
+                        }
+                }
+        }
+}
